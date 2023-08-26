@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TodoList</title>
+  </head>
+  <body>
+    <h1>로또 생성기</h1>
+    <button id="lottoBtn">로또생성</button>
+    <div id="lottoRender"></div>
+    <script>
+      document
+        .querySelector("#lottoBtn")
+        .addEventListener("click", function () {
+          document.querySelector("#lottoBtn").disabled = true;
+          let lottoList = new Set();
+          setInterval(() => {
+            if (lottoList.size < 6) {
+              lottoList.add(Math.floor(Math.random() * 50 + 1));
+              document.querySelector("#lottoRender").innerHTML = [...lottoList];
+            } else {
+              clearInterval(interval);
+            }
+          }, 500);
+          setTimeout(function () {
+            document.querySelector("#lottoBtn").disabled = false;
+          }, 4000);
+        });
+    </script>
+  </body>
+</html>
