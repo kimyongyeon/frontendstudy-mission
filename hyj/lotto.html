@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <h1>로또 생성기</h1>
+    <button id="lottoButton">로또 생성</button>
+    <div id="lottoRender"></div>
+    <h1>토요일스터디 투투짝퉁 핸즈랩</h1>
+    <input type="text" /><button>생성</button>
+    <ul>
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+    </ul>
+    <script>
+      //배열 생성
+      const lottoList = [];
+
+      //배열 자동생성을 위한 for문
+      for (let i = 1; i < 50; i++) {
+        lottoList.push(i);
+      }
+      let a = lottoList[0];
+      let b = lottoList[1];
+      let c = lottoList[2];
+      let d = lottoList[3];
+      let e = lottoList[4];
+      let f = lottoList[5];
+
+      //생성된 배열 출력
+      document.querySelector("#lottoRender").innerHTML =
+        a + "," + b + "," + c + "," + d + "," + e + "," + f;
+
+      //로또생성이라는 버튼 클릭시 위의 로직 실행되도록 이벤트 리스너에 해당 id 담기
+      document
+        .querySelector("#lottoButton")
+        .addEventListener("click", function (e) {
+          // let index = Math.floor((Math.random() * (49 - 1) + 1));
+          // let a1 = lottoList[index];
+          // index = Math.floor((Math.random() * (49 - 1) + 1));
+          // let b1 = lottoList[index];
+          // index = Math.floor((Math.random() * (49 - 1) + 1));
+          // let c1 = lottoList[index];
+          // index = Math.floor((Math.random() * (49 - 1) + 1));
+          // let d1 = lottoList[index];
+          // index = Math.floor((Math.random() * (49 - 1) + 1));
+          // let e1 = lottoList[index];
+          // index = Math.floor((Math.random() * (49 - 1) + 1));
+          // let f1 = lottoList[index];
+
+          let lottoSet = new Set();
+          let size = 0;
+          for (;;) {
+            let lottoList = Math.floor(Math.random() * (49 - 1) + 1);
+            lottoSet.add(lottoList);
+            if (lottoSet.size == 6) {
+              console.log(lottoSet);
+              break;
+            }
+          }
+          const resultList = [];
+          for (const num of lottoSet) {
+            console.log(num);
+            resultList.push(num);
+          }
+          document.querySelector("#lottoRender").innerHTML =
+            resultList.join(",");
+
+          // alert('로또생성 버튼 클릭완료!');
+        });
+    </script>
+  </body>
+</html>
