@@ -1,0 +1,24 @@
+h1 {
+  color: tomato;
+}
+
+#lotto{
+  
+  div{
+    display: inline-block;
+    margin-right: 10px;
+    position: relative;
+    opacity: 0;
+    animation: appear 1s .1s forwards; 
+  }
+
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
+}
