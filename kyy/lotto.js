@@ -1,33 +1,21 @@
-var globalName = "";
-
-window.globalName;
-
-document.querySelector(".lottoButton").addEventListener("click", function (e) {
-  alert("hello world");
-  displayNumbersWithInterval();
-});
-
-function generateRandomNumbers() {
-  let selectedNumbers = [];
-  while (selectedNumbers.length < 6) {
-    let randomNumber = Math.floor(Math.random() * 49) + 1;
-    if (selectedNumbers.indexOf(randomNumber) === -1) {
-      selectedNumbers.push(randomNumber);
-    }
+(function () {
+  let lottoDiv;
+  let lottoButton;
+  function init() {
+    this.lottoDiv = document.querySelector(".div");
+    this.lottoButton = document.querySelector(".button");
+    eventListener();
   }
-  return selectedNumbers;
-}
+  function randomLotto() {
+    render();
+  }
+  function eventListener() {
+    this.lottoButton.addEventListener("click", randomLotto);
+  }
 
-function displayNumbersWithInterval() {
-  let numbers = generateRandomNumbers();
-  let index = 0;
-  let interval = setInterval(() => {
-    console.log(numbers[index]);
-    document.querySelector(".lottoDiv").innerHTML = numbers[index];
-    index++;
-    if (index === numbers.length) {
-      clearInterval(interval);
-      console.log("완료: " + numbers.join(", "));
-    }
-  }, 500);
-}
+  function render() {
+    this.lottoDiv.innerHTML = `
+    
+    `;
+  }
+})();
