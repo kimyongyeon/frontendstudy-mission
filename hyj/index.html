@@ -3,12 +3,23 @@
     <script type="module" src="./index.js"></script>
     <h1>FRONT PROJECT</h1>
     <div id="menubar">
-        <div onclick="location.href='./lotto.html'">로또생성페이지</div>
-        <div onclick="location.href='/'">nothing</div>
-        <div onclick="location.href='/'">nothing</div>
+        <div onclick="lottoPage()"; return false;>로또생성페이지</div>
+        <div onclick="calculatorPage()"; return false;>계산기</div>
+        <div onclick="">nothing</div>
     </div>
     
     </div>
+    <script>
+        function lottoPage(){
+            // window.location.assign('/lotto.html');
+            location.href="lotto.html";
+        }
+
+        function calculatorPage(){
+            // window.location.assign('/calcul.html');
+            window.location.href="calculator.html";
+        }
+    </script>
   </body>
   <style>
     body{
@@ -28,7 +39,7 @@
 
     }
 
-    #menubar> div {
+    #menubar>div {
         font-size: larger;
         width: 150px;
         height: 80px;
