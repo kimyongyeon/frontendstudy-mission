@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <title>계산기</title>
+  </head>
+  <script>
+    function numberPress(val) {
+      var key = parseInt(event.key);
+      var oper = event.key;
+      const textCheck = /[a-z|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g;
+      if (key >= 0 && key <= 9) {
+        switch (key) {
+          case 0:
+            $("#zero").addClass("hoverEffect");
+            add(0);
+            setTimeout('$("#zero").removeClass("hoverEffect")', 200);
+            break;
+          case 1:
+            $("#one").addClass("hoverEffect");
+            add(1);
+            setTimeout('$("#one").removeClass("hoverEffect")', 200);
+            break;
+          case 2:
+            $("#two").addClass("hoverEffect");
+            add(2);
+            setTimeout('$("#two").removeClass("hoverEffect")', 200);
+            break;
+          case 3:
+            $("#three").addClass("hoverEffect");
+            add(3);
+            setTimeout('$("#three").removeClass("hoverEffect")', 200);
+            break;
+          case 4:
+            $("#four").addClass("hoverEffect");
+            add(4);
+            setTimeout('$("#four").removeClass("hoverEffect")', 200);
+            break;
+          case 5:
+            $("#five").addClass("hoverEffect");
+            add(5);
+            setTimeout('$("#five").removeClass("hoverEffect")', 200);
+            break;
+          case 6:
+            $("#six").addClass("hoverEffect");
+            add(6);
+            setTimeout('$("#six").removeClass("hoverEffect")', 200);
+            break;
+          case 7:
+            $("#seven").addClass("hoverEffect");
+            add(7);
+            setTimeout('$("#seven").removeClass("hoverEffect")', 200);
+            break;
+          case 8:
+            $("#eight").addClass("hoverEffect");
+            add(8);
+            setTimeout('$("#eight").removeClass("hoverEffect")', 200);
+            break;
+          case 9:
+            $("#nine").addClass("hoverEffect");
+            add(9);
+            setTimeout('$("#nine").removeClass("hoverEffect")', 200);
+            break;
+        }
+      } else if (
+        oper == "/" ||
+        oper == "*" ||
+        oper == "-" ||
+        oper == "+" ||
+        oper == "Enter"
+      ) {
+        switch (oper) {
+          case "/":
+            $("#divide").addClass("hoverEffect");
+            add("/");
+            setTimeout('$("#divide").removeClass("hoverEffect")', 200);
+            break;
+          case "*":
+            $("#multiply").addClass("hoverEffect");
+            add("*");
+            setTimeout('$("#multiply").removeClass("hoverEffect")', 200);
+            break;
+          case "-":
+            $("#sub").addClass("hoverEffect");
+            add("-");
+            setTimeout('$("#sub").removeClass("hoverEffect")', 200);
+            break;
+          case "+":
+            $("#plus").addClass("hoverEffect");
+            add("+");
+            setTimeout('$("#plus").removeClass("hoverEffect")', 200);
+            break;
+          case "Enter":
+            $("#result").addClass("hoverEffect");
+            add("=");
+            setTimeout('$("#result").removeClass("hoverEffect")', 200);
+            break;
+        }
+      } else if (textCheck.test(oper)) {
+        //숫자와 연산자 이외 입력시, alert처리
+        alert(
+          "한글 및 연산자 이외의 특수문자는 입력이 불가합니다. 숫자와 연산자만 입력바랍니다."
+        );
+      }
+      event.preventDefault();
+    }
+
+    //button click event
+    function add(data) {
+      //기존 데이터
+      let inputValue = $("#input_window").val();
+      const numberCheck = /[0-9]/;
+
+      //record data
+      let record = $("#record").text();
+
+      //입력된 숫자가 없는 경우, 기호문자를 먼저 입력했을때
+      if (!record && !numberCheck.test(data)) {
+        alert("숫자를 먼저 입력해주세요.");
+
+      } else if (data === "=" && !numberCheck.test(record.charAt(record.length - 1))) {
+        //연산식이 기호로 끝났을때 == 연산식이 올바르지 않을때,
+        alert("계산식이 올바르지 않습니다. 다시 입력해주세요.");
+
+      } else if (record && !inputValue && !numberCheck.test(data)) {
+        //연산자 연속입력시, 마지막 연산자 입력되게 함.
+        let delOper = record.substring(0, record.length - 2);
+        $("#record").text(delOper + " " + data + " ");
+
+      }else if (data == -1 && record.length > 0) {
+        //record에 기록이 존재하고, reset 버튼을 눌렀을때
+
+        //input 창에서 data delete
+        $("#input_window").val(null);
+
+        record = null;
+        $("#record").text(null);
+
+        console.log(record);
+
+      } else {
+        //계산버튼 클릭시,
+        if (data === "=" && numberCheck.test(record.substring(0, record.length - 1))) {
+          let arr = $("#record").text().split(" ");
+          //첫번째 데이터
+          cal = arr[0] * 1;
+
+          for (let i = 1; i < arr.length; i++) {
+            if (arr[i] === "+") {
+              cal += arr[i + 1] * 1;
+            } else if (arr[i] === "-") {
+              cal -= arr[i + 1] * 1;
+            } else if (arr[i] === "/") {
+              cal /= arr[i + 1] * 1;
+            } else if (arr[i] === "*") {
+              cal *= arr[i + 1] * 1;
+            } else {
+              continue;
+            }
+          }
+
+          //결과값이 소수점일때, 소수 2번째자리까지만 출력
+          if (!Number.isInteger(cal)) {
+            cal = cal.toFixed(2);
+          }
+
+          //계산식 결과 input창에 출력
+          $("#input_window").val(cal);
+
+          //계산식 전체 record에 기록
+          let resultRecord = record + " " + data + " " + cal;
+          $("#record").text(resultRecord);
+
+          //기존의 record div id 삭제
+          document.querySelector("#record").removeAttribute("id");
+
+          //record용 div 생성 및 id 부여
+          let newRecord = $("#result_record").append("<div id='record'></div>");
+
+          $("#input_window").val("");
+          $("#input_window").focus;
+        } else if (numberCheck.test(data)) {
+          //record 기록이 10개인 경우, 제일 먼저 입력한 기록값 삭제 후 기록
+          if ($("#result_record div").length == 11) {
+            $("#result_record div:eq(0)").remove();
+          }
+          //data가 숫자인 경우,
+          $("#record").text(record + data);
+          $("#input_window").val(inputValue + data);
+        } else {
+          //data가 기호인 경우,
+          // 공백 추가
+          //기록이 존재하고, 들어온 데이터가 
+          if (record !== "" && record != -1){
+            record = record + " " + data + " ";
+
+            //공백 + 기호문자
+            $("#record").text(record);
+
+            //기호문자 입력 후 input 창 지우기
+            $("#input_window").val("");
+          }
+
+        }
+      }
+    }
+  </script>
+  <body>
+    <div id="cal_container">
+      <form id="cal_data">
+        <input
+          type="text"
+          id="input_window"
+          minlength="3"
+          maxlength="11"
+          onkeydown="numberPress(event);"
+        />
+        <div>
+          <button type="button" id="seven" onclick="add(7)">7</button>
+          <button type="button" id="eight" onclick="add(8)">8</button>
+          <button type="button" id="nine" onclick="add(9)">9</button>
+          <button type="button" id="divide" onclick="add('/')">/</button>
+        </div>
+        <div>
+          <button type="button" id="four" onclick="add(4)">4</button>
+          <button type="button" id="five" onclick="add(5)">5</button>
+          <button type="button" id="six" onclick="add(6)">6</button>
+          <button type="button" id="multiply" onclick="add('*')">*</button>
+        </div>
+        <div>
+          <button type="button" id="one" onclick="add(1)">1</button>
+          <button type="button" id="two" onclick="add(2)">2</button>
+          <button type="button" id="three" onclick="add(3)">3</button>
+          <button type="button" id="sub" onclick="add('-')">-</button>
+        </div>
+        <div>
+          <button type="button" id="reset" onclick="add(-1)">C</button>
+          <button type="button" id="zero" onclick="add(0)">0</button>
+          <button type="button" id="result" onclick="add('=')">=</button>
+          <button type="button" id="plus" onclick="add('+')">+</button>
+        </div>
+      </form>
+    </div>
+    <div id="result_record" style="font-size: 50px">
+      <div id="record"></div>
+    </div>
+  </body>
+
+  <style>
+    body {
+      width: 1200px;
+      height: 800px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    body > div {
+      width: 500px;
+      height: 600px;
+      border: 1px solid black;
+      border-radius: 20px;
+      margin: 10px;
+    }
+
+    #input_window {
+      margin: 20px 0;
+      height: 100px;
+      border-radius: 10px;
+      border: 3px solid black;
+      font-size: 40px;
+    }
+
+    #input_window:focus {
+      outline: none;
+    }
+
+    #input_window:hover {
+      background-color: rgba(255, 255, 0, 0.2);
+    }
+
+    #cal_data > div {
+      margin: 10px;
+    }
+
+    button {
+      width: 100px;
+      height: 100px;
+      border-radius: 10px;
+      border: none;
+      background-color: rgba(128, 128, 128, 0.3);
+      font-size: xx-large;
+    }
+
+    #reset {
+      font-weight: 800;
+      background-color: rgb(255, 165, 0);
+    }
+
+    #reset:hover {
+      color: rgb(255, 165, 0);
+      background-color: rgba(255, 255, 0, 0.6);
+    }
+
+    button:hover {
+      background-color: rgba(255, 255, 0, 0.6);
+    }
+
+    .hoverEffect {
+      background-color: rgba(255, 255, 0, 0.2);
+    }
+/* 
+    #cal_data > div:last-child > button:not(:last-child) {
+      width: 150px;
+    } */
+
+    #result_record > div {
+      height: 60px;
+    }
+  </style>
+</html>
