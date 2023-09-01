@@ -13,22 +13,22 @@
       <div id="calculator">
         <input type="text" id="monitor" readonly />
         <button onclick="clearResult()" class="clear">C</button>
-        <button class="operator" onclick="addMonitor('/')">/</button>
+        <button class="operator" onclick="addOperator('/')">/</button>
         <button onclick="addMonitor('1')">1</button>
         <button onclick="addMonitor('2')">2</button>
         <button onclick="addMonitor('3')">3</button>
-        <button class="operator" onclick="addMonitor('*')">*</button>
+        <button class="operator" onclick="addOperator('*')">*</button>
         <button onclick="addMonitor('4')">4</button>
         <button onclick="addMonitor('5')">5</button>
         <button onclick="addMonitor('6')">6</button>
-        <button class="operator" onclick="addMonitor('+')">+</button>
+        <button class="operator" onclick="addOperator('+')">+</button>
         <button onclick="addMonitor('7')">7</button>
         <button onclick="addMonitor('8')">8</button>
         <button onclick="addMonitor('9')">9</button>
-        <button class="operator" onclick="addMonitor('-')">-</button>
+        <button class="operator" onclick="addOperator('-')">-</button>
         <button class="zero" onclick="addMonitor('0')">0</button>
-        <button onclick="addMonitor('.')">.</button>
-        <button onclick="showResult()" class="operator result">=</button>
+        <button class="dot" onclick="addDot('.')">.</button>
+        <button class="operator result" onclick="showResult()">=</button>
       </div>
     </div>
   </body>
