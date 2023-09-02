@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        button{
+            width: 60px;
+            height: 20px;
+            background-color: #ccc;
+            border-radius: 20px;
+            box-shadow:  2px 2px 2px 2px gray;;
+            margin-left: -5px;
+            margin-top: -5px;
+        }
+
+        button:active{
+            margin: 0;
+            box-shadow: none;
+        }
+
+        button:hover{
+            background-color: #666;
+        }
+
+        span{
+            display: inline-block;
+            width: 70px;
+            padding: 10px;
+        }
+
+        #operator{
+            width: 10px;
+        }
+
+        #result{
+            content:' ';
+            width: auto;
+            height: 21px;
+        }
+
+    </style>
+    <script defer src="./main.js"></script>
+</head>
+<body>
+
+    <input type="text" name="" id="num1" placeholder="num1">
+    <span id="operator">+</span>
+    <input type="text" name="" id="num2" placeholder="num2">
+    <br>
+    <span><button class="operator" type="button">+</button></span>
+    <span><button class="operator" type="button">-</button></span>
+    <span><button class="operator" type="button">*</button></span>
+    <span><button class="operator" type="button">/</button></span>
+    <span><button id="calculator" type="button">계산</button></span>
+
+    <br> = <span id="result"></span>
+
+</body>
+</html>
