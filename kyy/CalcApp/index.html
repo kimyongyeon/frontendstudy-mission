@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      p::before {
+        content: "버튼";
+        display: inline-block;
+        width: 50px;
+        height: 20px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <p>누구나 함께</p>
+    <p>누구나 함께</p>
+    <p>누구나 함께</p>
+    <p>누구나 함께</p>
+    <p>누구나 함께</p>
+    <p>누구나 함께</p>
+    <script>
+      const pElements = document.querySelectorAll("p");
+
+      pElements.forEach((p) => {
+        p.addEventListener("click", function (event) {
+          const rect = event.target.getBoundingClientRect();
+          const styles = getComputedStyle(event.target, "::before");
+
+          const beforeWidth = parseFloat(styles.width);
+          const beforeHeight = parseFloat(styles.height);
+          const beforeLeft = parseFloat(styles.left) || 0;
+          const beforeTop = parseFloat(styles.top) || 0;
+
+          const clickX = event.clientX - rect.left;
+          const clickY = event.clientY - rect.top;
+
+          if (
+            clickX >= beforeLeft &&
+            clickX <= beforeLeft + beforeWidth &&
+            clickY >= beforeTop &&
+            clickY <= beforeTop + beforeHeight
+          ) {
+            alert("가상 요소 클릭됨!");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
