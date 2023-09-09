@@ -1,0 +1,70 @@
+html,body{
+  height: 100%;
+}
+
+body{
+  position: relative;
+  background-color: lightgreen;
+}
+
+.container > * {
+  margin: 1%;
+}
+
+#wrap{
+  background-color: white;
+  box-sizing: border-box;
+  border:1px solid darkslategrey;
+  width: 60%;
+  top:20%;
+  left:20%;
+  position: absolute;
+}
+
+.float{
+  box-sizing: border-box;
+  position: absolute;
+  top:2%;
+  width: 100%;
+  padding-right: 20px;
+  text-align: right;
+}
+
+.container{
+  display: flex;
+}
+
+input{
+  width: 100%;
+  height: 5rem;
+  text-align: right;
+  margin: 1rem;
+  margin-top: 2rem;
+  color:black;
+  border: 1px solid lightseagreen;
+  font-size: 4vw;
+}
+
+button{
+  width: 25%;
+  height: 5vw;
+  color:white;
+  background-color: lightseagreen;
+  border: none;
+  font-size: 4vw;
+  border-radius: 10px;
+}
+
+button:hover{
+  background-color: #18807a
+}
+
+button:active{
+  background-color: rgb(15, 75, 72)
+}
+
+
+.zero{
+  width: 52%;
+}
+
