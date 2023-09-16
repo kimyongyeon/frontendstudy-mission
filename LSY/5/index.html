@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>TodoList</h1>
+    <input type="text" id="inputField" />
+    <button id="addBtn">추가</button>
+    <script>
+      const input = document.getElementById("inputField");
+      const button = document.getElementById("addBtn");
+      const documentBody = document.body;
+
+      button.addEventListener("click", () => {
+        const newTodo = document.createElement("div");
+        const deleteBtn = document.createElement("button");
+        newTodo.innerText = `${input.value}`;
+        deleteBtn.innerText = "x";
+        documentBody.appendChild(newTodo);
+        newTodo.appendChild(deleteBtn);
+      });
+      //   const parents = document.getElementById("parent");
+      //   const firstChild = document.getElementById("firstChild");
+      //   const middleChild = document.getElementById("middleChild");
+      //   const lastChild = document.getElementById("lastChild");
+
+      //   console.log(parents.childNodes);
+      //   console.log(firstChild.childNodes);
+      //   console.log(firstChild.nextElementSibling);
+      //   console.log(parents.firstChild);
+
+      //   const newElement = document.createElement("p");
+      //   newElement.textContent = "ㅂ브ㅡ븝";
+      //   document.body.appendChild(newElement);
+
+      //   const newElement2 = document.createElement("p");
+      //   newElement.textContent = "라디러다ㅓㄹ";
+      //   const referenceElement = document.body.lastChild;
+      //   document.body.insertBefore(newElement2, referenceElement);
+
+      //   const parentElement = document.body;
+      //   const appendElement = document.createElement("p");
+      //   appendElement.textContent = "Appendedafe";
+      //   parentElement.append(appendElement);
+
+      //     document.body.append("some text", document.createElement("br"));
+      //     document.body
+      //       .appendChild(document.createElement("p"))
+      //       .textContent("으아악");
+
+      //     const elementToMove = document.body.lastChild;
+      //     document.body.append(elementToMove);
+
+      //   const elementToRemove = document.body.lastChild;
+      //   elementToRemove.remove();
+
+      //   const element = document.body;
+      //   element.insertAdjacentHTML("beforeend", "<p>아닌가</p>");
+    </script>
+  </body>
+</html>
