@@ -19,3 +19,15 @@
     `;
   }
 })();
+
+function Counter() {
+  let count = 0;
+  return function () {
+    return count++;
+  };
+}
+
+let cnt = new Counter();
+console.log(cnt());
+console.log(cnt());
+console.log(cnt());

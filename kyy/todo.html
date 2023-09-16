@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="text" id="todoText"><button id="btnAdd">추가</button>
+  <div class="todoList" id="listDiv"></div>
+
+  <script>
+    (function (todoText, btnAdd, listDiv) {
+
+      let todoList = [];
+
+      // 초기화
+      function init() {
+        let selTodoText = document.getElementById(todoText);
+        let selDiv = document.getElementById(listDiv);
+        document.getElementById(btnAdd).addEventListener("click", addTodo);
+      }
+
+      // todo: 할일 Search 
+
+      // todo: 끝낸일, 미완료일 필터링 
+
+      // todo: 페이징 
+
+      // 렌더링
+      function render() {
+      }
+
+      // 할일 수정
+      function editTodo(e) {
+      }
+
+      // 할일 취소
+      function cancelTodo(e) {
+      }
+
+      // 할일 삭제
+      function delTodo(e) {
+        alert(e.target.value);
+      }
+
+      // 할일 추가
+      function addTodo(e) {
+        alert(e.target.value);
+      }
+
+      init();
+
+      return {
+
+      }
+
+    })("todoText", "btnAdd", "listDiv")
+  </script>
+</body>
+
+</html>
