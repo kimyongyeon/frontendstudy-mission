@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <h1>로또 생성기</h1>
+    <button id="lottoButton">로또생성</button>
+    <div id="lottoRender"></div>
+    <script>
+
+      //1. class형으로!
+
+      class Lotto {
+        constructor() {
+          this.lottoBtn = document.querySelector("#lottoButton");
+          this.lottoRender = document.querySelector("#lottoRender");
+        }
+
+        getLottoNum() {
+          return this.lottoBtn.addEventListener("click", () => {
+            let lottoArr = new Set();
+
+            setInterval(() => {
+              let randomNum = Math.floor(Math.random() * (45 - 1) + 1);
+
+              if (lottoArr.size < 6) {
+                lottoArr.add(randomNum);
+
+                document.querySelector("#lottoRender").innerHTML = [
+                  ...lottoArr,
+                ];
+              } else {
+                clearInterval(lottoArr);
+              }
+            }, 500);
+          });
+        }
+      }
+      let classLotto = new Lotto();
+      classLotto.getLottoNum();
+      
+      //2. 모듈패턴
+
+      function moduleLotto() {
+        let lottoBtn = document.querySelector("#lottoButton");
+        let lottoRender = document.querySelector("#lottoRender");
+
+        function getLottoNum() {
+          lottoBtn.addEventListener("click", () => {
+            let lottoArr = new Set();
+
+            setInterval(() => {
+              let randomNum = Math.floor(Math.random() * (45 - 1) + 1);
+
+              if (lottoArr.size < 6) {
+                lottoArr.add(randomNum);
+                document.querySelector("#lottoRender").innerHTML = [
+                  ...lottoArr,
+                ];
+              } else {
+                clearInterval(lottoArr);
+              }
+            }, 500);
+          });
+        }
+        return { getLottoNum };
+      }
+
+      const lotto = new moduleLotto();
+      lotto.getLottoNum();
+
+    </script>
+  </body>
+</html>
