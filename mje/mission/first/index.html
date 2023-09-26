@@ -11,7 +11,6 @@
     <button id="lottoButton">로또생성</button>
     <div id="lottoRender"></div>
     <script>
-
       //1. class형으로!
 
       class Lotto {
@@ -20,59 +19,71 @@
           this.lottoRender = document.querySelector("#lottoRender");
         }
 
+        getRandomNum() {
+          return Math.floor(Math.random() * (45 - 1) + 1);
+        }
+
+        updateLottoRender(lottoArr) {
+          this.lottoRender.innerHTML = [...lottoArr];
+        }
+
         getLottoNum() {
           return this.lottoBtn.addEventListener("click", () => {
             let lottoArr = new Set();
+            let intervalId;
 
-            setInterval(() => {
-              let randomNum = Math.floor(Math.random() * (45 - 1) + 1);
-
+            const generateLottoNumbers = () => {
               if (lottoArr.size < 6) {
-                lottoArr.add(randomNum);
-
-                document.querySelector("#lottoRender").innerHTML = [
-                  ...lottoArr,
-                ];
+                lottoArr.add(this.getRandomNum());
+                this.updateLottoRender(lottoArr);
               } else {
-                clearInterval(lottoArr);
+                clearInterval(intervalId);
               }
-            }, 500);
+            };
+
+            intervalId = setInterval(generateLottoNumbers, 500);
           });
         }
       }
       let classLotto = new Lotto();
       classLotto.getLottoNum();
-      
+
       //2. 모듈패턴
 
       function moduleLotto() {
         let lottoBtn = document.querySelector("#lottoButton");
         let lottoRender = document.querySelector("#lottoRender");
 
+        function getRandomNum() {
+          return Math.floor(Math.random() * (45 - 1) + 1);
+        }
+
+        function updateLottoRender(lottoArr) {
+          lottoRender.innerHTML = [...lottoArr];
+        }
+
         function getLottoNum() {
           lottoBtn.addEventListener("click", () => {
             let lottoArr = new Set();
+            let intervalId;
 
-            setInterval(() => {
-              let randomNum = Math.floor(Math.random() * (45 - 1) + 1);
-
+            const generateLottoNumbers = () => {
               if (lottoArr.size < 6) {
-                lottoArr.add(randomNum);
-                document.querySelector("#lottoRender").innerHTML = [
-                  ...lottoArr,
-                ];
+                lottoArr.add(getRandomNum());
+                updateLottoRender(lottoArr);
               } else {
-                clearInterval(lottoArr);
+                clearInterval(intervalId);
               }
-            }, 500);
+            };
+            interValId = setInterval(generateLottoNumbers, 500);
           });
         }
         return { getLottoNum };
       }
 
-      const lotto = new moduleLotto();
+      const lotto = moduleLotto();
       lotto.getLottoNum();
-
+      
     </script>
   </body>
 </html>
