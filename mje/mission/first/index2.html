@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      #lottoRender {
+        display: flex;
+      }
+      .lotto-balls {
+        color: rgb(191, 189, 189);
+        margin: 5px;
+        padding: 10px;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>로또 생성기2</h1>
+    <button id="lottoButton">로또생성</button>
+    <div id="lottoRender"></div>
+    <h2>지난 로또 번호</h2>
+    <div id="pastNums"></div>
+    <script>
+      function moduleLotto() {
+        // 로또 생성 버튼과 결과를 표시할 요소 지정
+        let lottoBtn = document.querySelector("#lottoButton");
+        let lottoRender = document.querySelector("#lottoRender");
+        let pastNums = document.querySelector("#pastNums");
+        let pastArr = [];
+
+        const colors = ["red", "orange", "yellow", "green", "blue", "purple"];
+
+        // 1부터 45 사이의 랜덤한 숫자 생성
+        function getRandomNum() {
+          return Math.floor(Math.random() * (45 - 1) + 1);
+        }
+
+        // 현재의 쌓인 로또번호를 화면에 업데이트
+        function updateLottoRender(lottoArr) {
+          lottoRender.innerHTML = "";
+          [...lottoArr].forEach((num, index) => {
+            let numElement = document.createElement("p");
+            numElement.textContent = num;
+            numElement.className = "lotto-balls";
+            numElement.style.backgroundColor = colors[index];
+            lottoRender.appendChild(numElement);
+          });
+        }
+
+        function pastLottoNumRender(pastArr) {
+          pastNums.innerHTML = "";
+          pastArr.forEach((nums) => {
+            let numsElement = document.createElement("p");
+            numsElement.textContent = nums;
+            pastNums.appendChild(numsElement);
+          });
+        }
+
+        // 새로운 랜덤한 숫자를 로또번호 배열에 업데이트한다. 0.5초 마다. lottoArr Set 객체를 setTimeout의 인자로 전달해준다.
+        function addNumber(lottoArr) {
+          if (lottoArr.size < 6) {
+            lottoArr.add(getRandomNum());
+            updateLottoRender(lottoArr);
+            console.log(lottoArr);
+            setTimeout(addNumber, 500, lottoArr);
+          } else if (lottoArr.size === 6) {
+            pastArr.push([...lottoArr]); //Set 을 배열로 넣기. 이중배열
+            console.log(pastArr);
+            pastLottoNumRender(pastArr);
+          }
+        }
+
+        //버튼 클릭에 대한 이벤트 핸들러.
+        function handleButtonClick() {
+          let lottoArr = new Set();
+          addNumber(lottoArr); // 숫자 추가 시작
+          console.log(lottoArr);
+        }
+
+        // 이벤트 리스너 추가
+        lottoBtn.addEventListener("click", handleButtonClick);
+      }
+
+      //모듈 호출
+      moduleLotto();
+    </script>
+  </body>
+</html>

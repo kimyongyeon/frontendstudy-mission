@@ -7,7 +7,7 @@
   </head>
 
   <body>
-    <h1>로또 생성기</h1>
+    <h1>로또 생성기1</h1>
     <button id="lottoButton">로또생성</button>
     <div id="lottoRender"></div>
     <script>
@@ -27,24 +27,29 @@
           this.lottoRender.innerHTML = [...lottoArr];
         }
 
+        generateLottoNumbers(lottoArr, intervalId) {
+          if (lottoArr.size < 6) {
+            lottoArr.add(this.getRandomNum());
+            this.updateLottoRender(lottoArr);
+          } else {
+            clearInterval(intervalId);
+          }
+        }
+
+        startGeneratingNumbers() {
+          let lottoArr = new Set();
+          let intervalId = setInterval(() => {
+            this.generateLottoNumbers(lottoArr, intervalId);
+          }, 500);
+        }
+
         getLottoNum() {
           return this.lottoBtn.addEventListener("click", () => {
-            let lottoArr = new Set();
-            let intervalId;
-
-            const generateLottoNumbers = () => {
-              if (lottoArr.size < 6) {
-                lottoArr.add(this.getRandomNum());
-                this.updateLottoRender(lottoArr);
-              } else {
-                clearInterval(intervalId);
-              }
-            };
-
-            intervalId = setInterval(generateLottoNumbers, 500);
+            this.startGeneratingNumbers();
           });
         }
       }
+
       let classLotto = new Lotto();
       classLotto.getLottoNum();
 
@@ -59,31 +64,28 @@
         }
 
         function updateLottoRender(lottoArr) {
-          lottoRender.innerHTML = [...lottoArr];
+          lottoRender.innerHTML = [...lottoArr].join(", ");
         }
 
         function getLottoNum() {
-          lottoBtn.addEventListener("click", () => {
-            let lottoArr = new Set();
-            let intervalId;
+          let lottoArr = new Set();
+          let intervalId;
 
-            const generateLottoNumbers = () => {
-              if (lottoArr.size < 6) {
-                lottoArr.add(getRandomNum());
-                updateLottoRender(lottoArr);
-              } else {
-                clearInterval(intervalId);
-              }
-            };
-            interValId = setInterval(generateLottoNumbers, 500);
-          });
+          const generateLottoNumbers = () => {
+            if (lottoArr.size < 6) {
+              lottoArr.add(getRandomNum());
+              updateLottoRender(lottoArr);
+            } else {
+              clearInterval(intervalId);
+            }
+          };
+          intervalId = setInterval(generateLottoNumbers, 500);
         }
-        return { getLottoNum };
+
+        lottoBtn.addEventListener("click", getLottoNum);
       }
 
-      const lotto = moduleLotto();
-      lotto.getLottoNum();
-      
+      moduleLotto();
     </script>
   </body>
 </html>
