@@ -26,6 +26,14 @@
 
   <body>
     <h1>로또 생성기2</h1>
+    <select id="setSelect">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+    </select>
     <button id="lottoButton">로또생성</button>
     <div id="lottoRender"></div>
     <h2>지난 로또 번호</h2>
@@ -82,9 +90,13 @@
 
         //버튼 클릭에 대한 이벤트 핸들러.
         function handleButtonClick() {
-          let lottoArr = new Set();
-          addNumber(lottoArr); // 숫자 추가 시작
-          console.log(lottoArr);
+          let setCount = parseInt(setSelect.value);
+
+          for (let i = 0; i < setCount; i++) {
+            let lottoArr = new Set();
+            addNumber(lottoArr); // 숫자 추가 시작
+            console.log(lottoArr);
+          }
         }
 
         // 이벤트 리스너 추가
