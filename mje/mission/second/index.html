@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        max-width: 400px;
+        border-radius: 10px;
+        border: 1px solid gray;
+        grid-gap: 3px;
+        padding: 5px;
+      }
+      .container div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 70px;
+        border-radius: 10px;
+        border: 1px solid gray;
+      }
+      .container div:hover {
+        cursor: pointer;
+      }
+      .container div.text-field {
+        grid-column-start: 1;
+        grid-column-end: 5;
+        display: flex;
+        justify-content: end;
+        padding: 0 20px;
+      }
+      .container div.result {
+        grid-column-start: 3;
+        grid-column-end: 5;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>계산기</h1>
+    <div class="container">
+      <div class="text-field">0</div>
+      <div class="ac-button">AC</div>
+      <div class="item">+/-</div>
+      <div class="item">%</div>
+      <div class="item">/</div>
+      <div class="item">7</div>
+      <div class="item">8</div>
+      <div class="item">9</div>
+      <div class="item">x</div>
+      <div class="item">4</div>
+      <div class="item">5</div>
+      <div class="item">6</div>
+      <div class="item">-</div>
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+      <div class="item">+</div>
+      <div class="item">0</div>
+      <div class="item">.</div>
+      <div class="item result">=</div>
+    </div>
+    <script defer src="main.js"></script>
+  </body>
+</html>
