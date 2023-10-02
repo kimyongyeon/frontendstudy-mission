@@ -55,9 +55,29 @@
 
       //2. 모듈패턴
 
+      /**
+       * 모듈화를 한다는 것은 코드를 재사용하기 위함이다.
+       * 아래 코드에 문제점은 무엇일까?
+       * 1. selector가 고정되어 있다.
+       * 2. getRandomNum() 함수가 고정되어 있다.
+       * 3. updateLottoRender() 함수가 고정되어 있다.
+       * 4. getLottoNum() 함수가 고정되어 있다.
+       * */
       function moduleLotto() {
         let lottoBtn = document.querySelector("#lottoButton");
         let lottoRender = document.querySelector("#lottoRender");
+
+        function setLottoBtn(selector) {
+          lottoBtn = document.querySelector(selector);
+        }
+
+        function selLottoRender(selector) {
+          lottoRender = document.querySelector(selector);
+        }
+
+        function setRandomNum(func) {
+          getRandomNum = func;
+        }
 
         function getRandomNum() {
           return Math.floor(Math.random() * (45 - 1) + 1);
@@ -83,9 +103,18 @@
         }
 
         lottoBtn.addEventListener("click", getLottoNum);
+
+        return {
+          setLottoBtn,
+          selLottoRender,
+          setRandomNum,
+        };
       }
 
-      moduleLotto();
+      const m = moduleLotto();
+      m.setLottoBtn("#lottoButton");
+      m.selLottoRender("#lottoRender");
+      m.setRandomNum(() => Math.floor(Math.random() * (45 - 1) + 1));
     </script>
   </body>
 </html>
