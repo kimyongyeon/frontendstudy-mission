@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
           : btnValue;
         currentInput = currentInput + addValue;
       }
-      textField.textContent = currentInput;
+      textField.textContent = currentInput.replace(/(^0+)/, "");
     });
   });
 
@@ -53,12 +53,14 @@ document.addEventListener("DOMContentLoaded", function () {
   // +/- 버튼 클릭 시 음/양수 변환
   negativeBtn.addEventListener("click", () => {
     currentInput *= -1;
+    currentInput = String(currentInput);
     textField.textContent = currentInput;
   });
 
   // % 버튼 클릭 시 % 계산
   percentBtn.addEventListener("click", () => {
     currentInput /= 100;
+    currentInput = String(currentInput);
     textField.textContent = currentInput;
   });
 
