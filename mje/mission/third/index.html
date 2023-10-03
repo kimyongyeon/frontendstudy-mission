@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        max-width: 400px;
+        border-radius: 10px;
+        border: 1px solid gray;
+        grid-gap: 4px;
+        padding: 5px;
+        background-color: #403e3e;
+        font-size: 24px;
+        font-weight: 700;
+        color: white;
+        letter-spacing: 2px;
+      }
+      .container div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 70px;
+        border-radius: 10px;
+        border: 1px solid gray;
+        background-color: #555252;
+      }
+      .container div:hover {
+        cursor: pointer;
+        opacity: 0.8;
+      }
+      .container div.operator {
+        background-color: darkorange;
+      }
+      .container div.text-field {
+        grid-column-start: 1;
+        grid-column-end: 5;
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        padding: 4px 20px 0;
+        margin-bottom: 4px;
+        background-color: #282727;
+        font-size: 36px;
+      }
+      .container div.result-btn {
+        grid-column-start: 3;
+        grid-column-end: 5;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>계산기</h1>
+    <div class="container">
+      <div class="text-field">0</div>
+      <div class="ac-btn">AC</div>
+      <div class="negative item">+/-</div>
+      <div class="percent item">%</div>
+      <div class="item operator">/</div>
+      <div class="item">7</div>
+      <div class="item">8</div>
+      <div class="item">9</div>
+      <div class="item operator">*</div>
+      <div class="item">4</div>
+      <div class="item">5</div>
+      <div class="item">6</div>
+      <div class="item operator">-</div>
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+      <div class="item operator">+</div>
+      <div class="item">0</div>
+      <div class="dot item">.</div>
+      <div class="result-btn item operator">=</div>
+    </div>
+    <script defer src="main.js"></script>
+  </body>
+</html>
