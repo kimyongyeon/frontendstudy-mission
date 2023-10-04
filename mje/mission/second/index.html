@@ -28,23 +28,30 @@
         border: 1px solid gray;
         background-color: #555252;
       }
+      .container .text-field {
+        text-align: end;
+        height: 70px;
+        border-radius: 10px;
+        border: 1px solid gray;
+        background-color: #555252;
+        grid-column-start: 1;
+        grid-column-end: 5;
+        padding: 4px 20px 0;
+        margin-bottom: 4px;
+        background-color: #282727;
+        font-size: 36px;
+        color: white;
+        outline: none;
+        caret-color: transparent;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
       .container div:hover {
         cursor: pointer;
         opacity: 0.8;
       }
       .container div.operator {
         background-color: darkorange;
-      }
-      .container div.text-field {
-        grid-column-start: 1;
-        grid-column-end: 5;
-        display: flex;
-        justify-content: end;
-        align-items: center;
-        padding: 4px 20px 0;
-        margin-bottom: 4px;
-        background-color: #282727;
-        font-size: 36px;
       }
       .container div.result-btn {
         grid-column-start: 3;
@@ -55,7 +62,7 @@
   <body>
     <h1>계산기</h1>
     <div class="container">
-      <div class="text-field">0</div>
+      <input class="text-field"></input>
       <div class="ac-btn">AC</div>
       <div class="negative item">+/-</div>
       <div class="percent item">%</div>
