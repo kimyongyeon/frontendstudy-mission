@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-do List</title>
+    <style>
+      body {
+        text-align: center;
+      }
+      .todo {
+        max-width: 300px;
+        width: 100%;
+        min-height: 50px;
+        height: 100%;
+        border-radius: 10px;
+        border: 1px solid #666;
+      }
+      ul {
+        padding: 0;
+      }
+      li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        list-style: none;
+        max-width: 400px;
+        width: 100%;
+        min-height: 50px;
+        height: 100%;
+        margin: 10px auto;
+        border: 2px dashed #666;
+        border-radius: 10px;
+        padding: 0 10px;
+        font-size: 20px;
+      }
+      .add-line {
+        text-decoration: line-through;
+      }
+      button {
+        color: #fff;
+        background-color: #bbb;
+        padding: 4px 8px;
+        border-radius: 5px;
+        border: 1px solid #bbb;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      button:active {
+        background-color: #666;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>To-do List</h1>
+    <div class="container">
+      <input type="text" class="todo" placeholder="할일을 입력하세요" />
+      <button class="addTodo">추가</button>
+      <ul class="todoList">
+      </ul>
+    </div>
+    <script defer src="main.js"></script>
+  </body>
+</html>
+
+<!-- 
+    1. 클로저 + 모듈패턴 이용해서 틀에 맞게 개발하기 
+    2. 모듈화 파일 분리, 역할, 책임 분리해서 개발하기  
+
+    ul, li 에 리스트 쌓이게하기. delete 랑 done 버튼
+-->
