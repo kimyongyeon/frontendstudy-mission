@@ -1,3 +1,4 @@
+// FIXED: 2021-07-20 [10:00 AM]
 (function () {
   let lottoDiv;
   let lottoButton;

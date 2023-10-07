@@ -1,0 +1,12 @@
+// 1. parcel 설치
+// npm install -g parcel-bundler
+
+// 2. nodejs install 
+
+// 3. github download 
+git clone https://github.com/kimyongyeon/frontendstudy-mission.git
+mkdir mje
+cd mje 
+touch index.html 
+
+npm init -y 
