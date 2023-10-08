@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>이벤트 위임 예제코드</title>
+    <style>
+      #container div {
+        width: 100px;
+        height: 50px;
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h3>이벤트 위임 예제코드1</h3>
+    <p>이벤트 위임을 사용해서 메시지 숨기기.</p>
+    <p>
+      P.S. 이벤트 위임을 사용해서 단 하나의 이벤트 리스너만으로도 삭제 버튼이
+      동작하도록 구현해보세요.
+    </p>
+    <div id="container">
+      <div class="pane">1111<button class="remove-button">삭제</button></div>
+      <div class="pane">2222<button class="remove-button">삭제</button></div>
+      <div class="pane">3333<button class="remove-button">삭제</button></div>
+    </div>
+    <script>
+      const container = document.getElementById("container");
+      container.addEventListener("click", (e) => {
+        if (e.target.tagName === "BUTTON") {
+          e.target.parentNode.remove();
+        }
+      });
+      // 다른방식
+      //   const container = document.getElementById("container");
+      //   container.addEventListener("click", (e) => {
+      //       if (e.target.className != "remove-button") return;
+
+      //     let pane = e.target.closest(".pane");
+      //     pane.remove();
+
+      //     });
+    </script>
+  </body>
+</html>
