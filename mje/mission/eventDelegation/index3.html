@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>이벤트 위임 예제코드3</title>
+    <style></style>
+  </head>
+
+  <body>
+    <h3>이벤트 위임 예제코드3</h3>
+    <p>정렬 기능을 제공하는 표</p>
+    <p>
+      열 제목을 나타내는 요소인 th 를 클릭하면 열 전체가 정렬되는 표를
+      만들어보세요. 모든 th 속성엔 다음과 같이 데이터의 타입이 정의되어
+      있습니다.
+    </p>
+    <table id="grid">
+      <thead>
+        <tr>
+          <th data-type="number">나이</th>
+          <th data-type="string">이름</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>5</td>
+          <td>라이언</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>튜브</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>어피치</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>춘식</td>
+        </tr>
+      </tbody>
+    </table>
+    <script>
+      //풀이 1
+      // 테이블 요소를 선택합니다.
+      const table = document.getElementById("grid");
+
+      // 클릭 이벤트를 테이블에 위임합니다.
+      table.addEventListener("click", (e) => {
+        // 클릭된 요소가 TH인지 확인합니다.
+        if (e.target.tagName === "TH") {
+          // 클릭된 TH 요소의 데이터 타입을 가져옵니다.
+          const dataType = e.target.getAttribute("data-type");
+
+          // TH 요소의 인덱스를 가져옵니다.
+          const columnIndex = Array.from(e.target.parentNode.children).indexOf(
+            e.target
+          );
+
+          // 정렬을 수행할 tbody를 선택합니다.
+          const tbody = table.querySelector("tbody");
+
+          // tbody의 모든 tr 요소를 배열로 가져옵니다.
+          const rows = Array.from(tbody.querySelectorAll("tr"));
+
+          // 정렬 방향을 결정하기 위한 변수를 설정합니다.
+          let ascending = true;
+
+          // 현재 열의 데이터 타입에 따라 정렬 방식을 결정합니다.
+          if (dataType === "number") {
+            rows.sort((a, b) => {
+              const aValue = parseInt(a.children[columnIndex].textContent);
+              const bValue = parseInt(b.children[columnIndex].textContent);
+              return ascending ? aValue - bValue : bValue - aValue;
+            });
+          } else if (dataType === "string") {
+            rows.sort((a, b) => {
+              const aValue = a.children[columnIndex].textContent;
+              const bValue = b.children[columnIndex].textContent;
+              return ascending
+                ? aValue.localeCompare(bValue)
+                : bValue.localeCompare(aValue);
+            });
+          }
+
+          // 정렬된 행을 tbody에 다시 추가합니다.
+          rows.forEach((row) => tbody.appendChild(row));
+
+          // 정렬 방향을 토글합니다.
+          ascending = !ascending;
+        }
+      });
+
+      //풀이 2
+      //   const table = document.getElementById("grid");
+
+      table.addEventListener("click", (e) => {
+        if (e.target.tagName != "TH") return;
+
+        let th = e.target;
+        // 클릭한 요소가 TH라면 정렬을 진행합니다.
+        // cellIndex는 몇 번째 열인지를 나타내는 인덱스 값입니다.
+        //   첫 번째 열이라면 0,
+        //   두 번째 열이라면 1이 됩니다.
+        sortGrid(th.cellIndex, th.dataset.type);
+      });
+
+      function sortGrid(colNum, type) {
+        let tbody = grid.querySelector("tbody");
+
+        let rowsArray = Array.from(tbody.rows);
+
+        // 변수 compare에 할당할 함수 compare(a, b)는 두 행을 비교하고 필요에 따라 정렬을 진행합니다.
+        let compare;
+
+        switch (type) {
+          case "number":
+            compare = function (rowA, rowB) {
+              return (
+                rowA.cells[colNum].innerHTML - rowB.cells[colNum].innerHTML
+              );
+            };
+            break;
+          case "string":
+            compare = function (rowA, rowB) {
+              return rowA.cells[colNum].innerHTML > rowB.cells[colNum].innerHTML
+                ? 1
+                : -1;
+            };
+            break;
+        }
+
+        // 해당 열을 정렬합니다.
+        rowsArray.sort(compare);
+
+        tbody.append(...rowsArray);
+      }
+    </script>
+  </body>
+</html>

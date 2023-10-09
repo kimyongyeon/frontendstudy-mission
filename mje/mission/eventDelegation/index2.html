@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>이벤트 위임 예제코드2</title>
+    <style>
+      span {
+        cursor: pointer;
+        background-color: rgb(149, 194, 195);
+      }
+    </style>
+  </head>
+
+  <body>
+    <h3>이벤트 위임 예제코드2</h3>
+    <p>트리 메뉴 구현하기</p>
+    <p>
+      1.단 하나의 이벤트 핸들러(이벤트 위임 사용하기) 2.노드(텍스트) 바깥(빈
+      곳)을 클릭하면 아무 일도 일어나지 않아야 합니다.
+    </p>
+    <ul class="tree" id="tree">
+      <li>
+        Animals
+        <ul>
+          <li>
+            Mammals
+            <ul>
+              <li>Cows</li>
+              <li>Donkeys</li>
+              <li>Dogs</li>
+              <li>Tigers</li>
+            </ul>
+          </li>
+          <li>
+            Other
+            <ul>
+              <li>Snakes</li>
+              <li>Birds</li>
+              <li>Lizards</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        Fishes
+        <ul>
+          <li>
+            Aquarium
+            <ul>
+              <li>Guppy</li>
+              <li>Angelfish</li>
+            </ul>
+          </li>
+          <li>
+            Sea
+            <ul>
+              <li>Sea trout</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <script>
+      //풀이 1
+      function wrapTextNodes(node) {
+        if (node.nodeType === Node.TEXT_NODE && /\S/.test(node.textContent)) {
+          const span = document.createElement("span");
+          span.textContent = node.textContent;
+          node.parentNode.insertBefore(span, node);
+          node.parentNode.removeChild(node);
+        } else {
+          for (const childNode of node.childNodes) {
+            wrapTextNodes(childNode);
+          }
+        }
+      }
+
+      // 최상위 요소인 <ul>을 선택하고 처리 시작
+      const tree = document.getElementById("tree");
+      wrapTextNodes(tree);
+
+      tree.addEventListener("click", (e) => {
+        const target = e.target;
+
+        // 클릭된 요소가 <span> 요소인 경우에만 처리
+        if (target.tagName === "SPAN") {
+          // <ul> 요소를 찾아서 하위 노드 숨기기
+          const ul = target.nextElementSibling;
+          if (ul) {
+            if (ul.style.display === "none" || ul.style.display === "") {
+              // 숨겨져 있을 때 보이도록 설정
+              ul.style.display = "block";
+            } else {
+              // 보이고 있을 때 숨기도록 설정
+              ul.style.display = "none";
+            }
+          }
+        }
+      });
+
+      // 풀이 2
+      // const tree = document.querySelector("#tree"); //풀이1에서 선언됨
+
+      for (let li of tree.querySelectorAll("li")) {
+        let span = document.createElement("span");
+        li.prepend(span); // span 을 li(부모요소의 처음에 추가함)
+        span.append(span.nextSibling); // 텍스트 노드를 span 안으로 옮깁니다.
+      }
+
+      // 트리 전체의 클릭 이벤트를 감지하는 리스너를 만듭니다.
+
+      tree.addEventListener("click", (event) => {
+        if (event.target.tagName != "SPAN") {
+          return;
+        }
+        // 클릭 된 span 요소의 부모요소인 li의 자손중에 ul 요소를 찾는다. (해당 li 요소에 하위 노드가 있는지 확인하기 위한것)
+        let childrenContainer = event.target.parentNode.querySelector("ul");
+        if (!childrenContainer) return; // 자손 노드가 없는 경우
+
+        childrenContainer.hidden = !childrenContainer.hidden;
+        //.hidden은 HTML 요소의 DOM 프로퍼티중 하나이다.
+        // 이 프로퍼티는 요소의 표시 여부를 제어하는데 사용한다. true 또는 false의 값을 가질 수 있다.
+      });
+
+      //풀이 3
+      // 2번 조건인 노드 밖을 클릭했을 때 아무일도 일어나지 않기가 충족되지 않았다.
+      // 근데 간단하게 구현하기엔 아주 좋아보임
+      document
+        .getElementById("tree")
+        .addEventListener("click", function (event) {
+          // 클릭된 요소가 <li> 요소인지 확인
+          if (event.target.tagName === "LI") {
+            let ul = event.target.querySelector("ul");
+            if (ul) {
+              // <ul> 요소의 표시 상태를 변경
+              ul.style.display = ul.style.display === "none" ? "" : "none";
+            }
+          }
+        });
+    </script>
+  </body>
+</html>
