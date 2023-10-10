@@ -64,44 +64,46 @@
     </ul>
 
     <script>
-      //풀이 1
-      function wrapTextNodes(node) {
-        if (node.nodeType === Node.TEXT_NODE && /\S/.test(node.textContent)) {
-          const span = document.createElement("span");
-          span.textContent = node.textContent;
-          node.parentNode.insertBefore(span, node);
-          node.parentNode.removeChild(node);
-        } else {
-          for (const childNode of node.childNodes) {
-            wrapTextNodes(childNode);
-          }
-        }
-      }
+      // //풀이 1
+      // function wrapTextNodes(node) {
+      //   if (node.nodeType === Node.TEXT_NODE && /\S/.test(node.textContent)) {
+      //     const span = document.createElement("span");
+      //     span.textContent = node.textContent;
+      //     node.parentNode.insertBefore(span, node);
+      //     node.parentNode.removeChild(node);
+      //   } else {
+      //     for (const childNode of node.childNodes) {
+      //       wrapTextNodes(childNode);
+      //     }
+      //   }
+      // }
 
-      // 최상위 요소인 <ul>을 선택하고 처리 시작
-      const tree = document.getElementById("tree");
-      wrapTextNodes(tree);
+      // const addTreeToggle = (selector) => {
+      //   // 최상위 요소인 <ul>을 선택하고 처리 시작
+      //   const tree = document.querySelector(selector);
+      //   wrapTextNodes(tree);
 
-      tree.addEventListener("click", (e) => {
-        const target = e.target;
+      //   tree.addEventListener("click", (e) => {
+      //     const target = e.target;
 
-        // 클릭된 요소가 <span> 요소인 경우에만 처리
-        if (target.tagName === "SPAN") {
-          // <ul> 요소를 찾아서 하위 노드 숨기기
-          const ul = target.nextElementSibling;
-          if (ul) {
-            if (ul.style.display === "none" || ul.style.display === "") {
-              // 숨겨져 있을 때 보이도록 설정
-              ul.style.display = "block";
-            } else {
-              // 보이고 있을 때 숨기도록 설정
-              ul.style.display = "none";
-            }
-          }
-        }
-      });
+      //     // 클릭된 요소가 <span> 요소인 경우에만 처리
+      //     if (target.tagName === "SPAN") {
+      //       // <ul> 요소를 찾아서 하위 노드 숨기기
+      //       const ul = target.nextElementSibling;
+      //       if (ul) {
+      //         if (ul.style.display === "none" || ul.style.display === "") {
+      //           // 숨겨져 있을 때 보이도록 설정
+      //           ul.style.display = "block";
+      //         } else {
+      //           // 보이고 있을 때 숨기도록 설정
+      //           ul.style.display = "none";
+      //         }
+      //       }
+      //     }
+      //   });
+      // };
 
-      // 풀이 2
+      // // 풀이 2
       // const tree = document.querySelector("#tree"); //풀이1에서 선언됨
 
       for (let li of tree.querySelectorAll("li")) {
@@ -124,22 +126,23 @@
         //.hidden은 HTML 요소의 DOM 프로퍼티중 하나이다.
         // 이 프로퍼티는 요소의 표시 여부를 제어하는데 사용한다. true 또는 false의 값을 가질 수 있다.
       });
+      
 
-      //풀이 3
-      // 2번 조건인 노드 밖을 클릭했을 때 아무일도 일어나지 않기가 충족되지 않았다.
-      // 근데 간단하게 구현하기엔 아주 좋아보임
-      document
-        .getElementById("tree")
-        .addEventListener("click", function (event) {
-          // 클릭된 요소가 <li> 요소인지 확인
-          if (event.target.tagName === "LI") {
-            let ul = event.target.querySelector("ul");
-            if (ul) {
-              // <ul> 요소의 표시 상태를 변경
-              ul.style.display = ul.style.display === "none" ? "" : "none";
-            }
-          }
-        });
+      //   //풀이 3
+      //   // 2번 조건인 노드 밖을 클릭했을 때 아무일도 일어나지 않기가 충족되지 않았다.
+      //   // 근데 간단하게 구현하기엔 아주 좋아보임
+      //   document
+      //     .getElementById("tree")
+      //     .addEventListener("click", function (event) {
+      //       // 클릭된 요소가 <li> 요소인지 확인
+      //       if (event.target.tagName === "LI") {
+      //         let ul = event.target.querySelector("ul");
+      //         if (ul) {
+      //           // <ul> 요소의 표시 상태를 변경
+      //           ul.style.display = ul.style.display === "none" ? "" : "none";
+      //         }
+      //       }
+      //     });
     </script>
   </body>
 </html>

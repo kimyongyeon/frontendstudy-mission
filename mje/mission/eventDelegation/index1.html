@@ -27,21 +27,38 @@
       <div class="pane">3333<button class="remove-button">삭제</button></div>
     </div>
     <script>
-      const container = document.getElementById("container");
-      container.addEventListener("click", (e) => {
-        if (e.target.tagName === "BUTTON") {
-          e.target.parentNode.remove();
-        }
-      });
-      // 다른방식
-      //   const container = document.getElementById("container");
-      //   container.addEventListener("click", (e) => {
-      //       if (e.target.className != "remove-button") return;
+      // 풀이1
+      // const container = document.getElementById("container");
+      // container.addEventListener("click", (e) => {
+      //   if (e.target.tagName === "BUTTON") {
+      //     e.target.parentNode.remove();
+      //   }
+      // });
+      ////////////////////////////////////////////////////////////////
 
-      //     let pane = e.target.closest(".pane");
-      //     pane.remove();
+      const removeParentOnClick = (selector) => {
+        const element = document.querySelector(selector);
 
-      //     });
+        element.addEventListener("click", (e) => {
+          if (e.target.tagName === "BUTTON") {
+            e.target.parentNode.remove();
+          }
+        });
+      };
+
+      removeParentOnClick("#container");
+
+      ////////////////////////////////////////////////////////
+
+      // //풀이2
+      // const container = document.getElementById("container");
+      // container.addEventListener("click", (e) => {
+      //   if (e.target.className != "remove-button") return;
+
+      //   let pane = e.target.closest(".pane");
+      //   //closest는 주어진 CSS 선택자나 태그 이름에 가장 근접한 부모 요소를 찾아준다.
+      //   pane.remove();
+      // });
     </script>
   </body>
 </html>
