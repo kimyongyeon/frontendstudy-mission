@@ -45,50 +45,56 @@
       버튼이 화면 맨 위쪽에 위치하도록 스크롤을 움직여보고, 그 상태에서 툴팁이
       제대로 버튼 아래에 나타나는지 확인해보세요.
     </p>
-    <script>
-      const TooltipModule = (function () {
-        let currentTooltip; // 현재 활성화된 툴팁을 저장할 변수
-
-        // 툴팁 요소 생성 함수
+    <script type="module">
+      import { createAndSetElement, addEventHandler } from "./util.js";
+      const FloatTooltipModule = (function () {
+        let currentTooltip;
+        // 툴팁 생성 함수를 상수에 할당
+        // const tooltipElem = createAndSetElement("div", "tooltip", tooltipText);
         function createTooltip(tooltipText) {
-          const tooltipElem = document.createElement("div");
-          tooltipElem.className = "tooltip";
-          tooltipElem.innerHTML = tooltipText;
+          const tooltipElem = createAndSetElement(
+            "div",
+            "tooltip",
+            tooltipText
+          );
           return tooltipElem;
         }
 
-        // 툴팁 위치 설정 함수
-        function setTooltipPosition(tooltipElem, target, offset = 5) {
-          const rect = target.getBoundingClientRect();
+        function setTooltipPosition(tooltipElem, target) {
+          // 툴팁 위치 설정 함수
+          let rect = target.getBoundingClientRect();
+
           let left =
-            rect.left + (target.offsetWidth - tooltipElem.offsetWidth) / 2;
+            rect.left +
+            (event.target.offsetWidth - tooltipElem.offsetWidth) / 2;
           if (left < 0) left = 0;
-          let top = rect.top - tooltipElem.offsetHeight - offset;
+          let top = rect.top - tooltipElem.offsetHeight - 5;
           if (top < 0) {
-            top = rect.top + target.offsetHeight + offset;
+            top = rect.top + event.target.offsetHeight + 5;
           }
+
           tooltipElem.style.left = left + "px";
           tooltipElem.style.top = top + "px";
         }
 
-        // 이벤트 핸들러 함수
         function handleMouseOver(event) {
-          const tooltipText = event.target.getAttribute("data-tooltip");
+          // 마우스 오버 이벤트 핸들러
+          let tooltipText = event.target.getAttribute("data-tooltip");
           if (!tooltipText) return;
 
-          // 현재 툴팁이 존재하는 경우 제거
           if (currentTooltip) {
+            // 이미 툴팁이 존재하면 제거
             currentTooltip.remove();
           }
 
           const tooltipElem = createTooltip(tooltipText);
-          document.body.append(tooltipElem);
+          document.body.appendChild(tooltipElem);
           setTooltipPosition(tooltipElem, event.target);
-          currentTooltip = tooltipElem; // 현재 툴팁을 저장
+          currentTooltip = tooltipElem; // 현재 툴팁 저장
         }
 
         function handleMouseOut() {
-          // 마우스가 요소에서 벗어났을 때 현재 툴팁 제거
+          // 마우스 아웃 이벤트 핸들러
           if (currentTooltip) {
             currentTooltip.remove();
             currentTooltip = null;
@@ -105,7 +111,7 @@
       })();
 
       // 모듈 초기화
-      TooltipModule.init();
+      FloatTooltipModule.init();
     </script>
   </body>
 </html>

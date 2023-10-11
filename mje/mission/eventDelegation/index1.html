@@ -26,28 +26,23 @@
       <div class="pane">2222<button class="remove-button">삭제</button></div>
       <div class="pane">3333<button class="remove-button">삭제</button></div>
     </div>
-    <script>
+    <script type="module">
       // 풀이1
-      // const container = document.getElementById("container");
-      // container.addEventListener("click", (e) => {
-      //   if (e.target.tagName === "BUTTON") {
-      //     e.target.parentNode.remove();
-      //   }
-      // });
-      ////////////////////////////////////////////////////////////////
+      import { createAndSetElement, addClickEventHandler } from "./util.js";
 
-      const removeParentOnClick = (selector) => {
-        const element = document.querySelector(selector);
-
-        element.addEventListener("click", (e) => {
+      document.addEventListener("DOMContentLoaded", function () {
+        //util 모듈 가져다 쓰기
+        addClickEventHandler("#container", (e) => {
           if (e.target.tagName === "BUTTON") {
             e.target.parentNode.remove();
           }
         });
-      };
 
-      removeParentOnClick("#container");
-
+        const box = document.querySelector(".pane");
+        //util 모듈 가져다 쓰기
+        const boxElement = createAndSetElement("DIV", undefined, "박스입니다");
+        box.append(boxElement);
+      });
       ////////////////////////////////////////////////////////
 
       // //풀이2
