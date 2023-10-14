@@ -1,11 +1,12 @@
 import { Util } from "./modules/util";
+
 import {
   handleContainerClick,
   handleTreeClick,
   handleGridClick,
 } from "./modules/eventHandler";
 
-document.querySelector("#container").addEventListener("click");
+// document.querySelector("#container").addEventListener("click");
 document.getElementById("tree").addEventListener("click", handleTreeClick);
 document.getElementById("grid").addEventListener("click", handleGridClick);
 

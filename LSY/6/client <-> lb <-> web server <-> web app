@@ -1,0 +1,4 @@
+client <-> lb <-> web server <-> web application server (was) <-> DB server 
+
+web server : static resource 
+WAS : dynamic resource (java, node, c...)
