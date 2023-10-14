@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <h1>location을 탐구</h1>
+
+  <script>
+
+    const todoMsg = {
+      id: 1,
+      msg: '할일을 입력하세요.',
+      date: '2020-10-10',
+      isDone: false
+    }
+
+    function todoInput(todoMsg) {
+
+      // if문 없애기 
+      // 맵핑 
+      // open/close interface 
+
+      console.log(todoMsg);
+      const db = new DataAccess();
+      db.save('todo', todoMsg);
+      db.jsonSave('tody', todoMsg);
+      // localStorage.setItem('todo', todoMsg);
+
+      const id = confirm('아이디를 입력하세요.');
+      if (id) {
+        iif(Util.validatoin(id)); // 숫자로 시작하는지, 특수문자가 들어가는지, 길이가 4자리 이상인지
+
+        if (db.DataAccess.select(id)) {
+          if (db.DataAccess.isPassword(id)) {
+            // 로그인 성공
+          } else {
+            // 비밀번호가 틀림
+          }
+        }
+      }
+
+    }
+
+    function Util() {
+      function validatoin(key) {
+        return true;
+      }
+      return {
+        validatoin
+      }
+    }
+
+    function DataAccess() {
+      // value 데이터타입 
+      // 문자열, 숫자, json, list .... 
+      function save(key, value) {
+        console.log(key, value);
+        localStorage.setItem(key, value);
+      }
+      function strSave(key, value) {
+
+      }
+
+      function listSave(key, value) {
+
+      }
+
+      function jsonSave(key, value) {
+
+      }
+      return {
+        save
+      }
+    }
+
+
+    const fnLocation = () => {
+      // console.log(window.location.href);
+
+      // window.location.href = 'https://www.naver.com'; // 이동을 history에 남기지 않음
+
+      // setTimeout(() => window.location.replace('http://127.0.0.1:5500/kyy/replace.html'), 1000);
+
+      // window.location.reload(); // 새로고침
+
+
+      // cookie 
+
+      // localStorage 
+
+      // sessionStorage
+
+      // PWA (Progressive Web App) : 웹앱
+
+      // indexedDB : 웹 DB
+
+
+
+
+
+    }
+    fnLocation();
+
+    const isLoginfalse = (function () {
+      setTimeout(() => isLogin(), 1000);
+
+      const isLogin = () => {
+        let name = prompt("이름을 입력하세요.");
+        if (name === 'admin') {
+          alert('관리자입니다.');
+        } else {
+          alert(`${name}님, 안녕하세요.`);
+        }
+      }
+    });
+
+  </script>
+</body>
+
+</html>
