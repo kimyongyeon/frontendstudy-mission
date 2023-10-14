@@ -4,11 +4,100 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>index.html</title>
+  <title>Document</title>
+  <link rel="stylesheet" href="./styles.scss">
 </head>
 
 <body>
-  <h1>hello world</h1>
+  <header>header
+    <h1>grid 얼마나 아세요?</h1>
+    <nav>
+      <ul>
+        <li><a href="#">메뉴1</a></li>
+        <li><a href="#">메뉴2</a></li>
+        <li><a href="#">메뉴3</a></li>
+        <li><a href="#">메뉴4</a></li>
+        <li><a href="#">메뉴5</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>main
+
+    <div class="gallery-grid">
+      <div class="item1"></div>
+      <div class="item2"></div>
+      <div class="item3"></div>
+      <div class="item4"></div>
+      <div class="item5"></div>
+      <div class="item6"></div>
+      <div class="item7"></div>
+      <div class="item8"></div>
+      <div class="item9"></div>
+      <div class="item10"></div>
+    </div>
+
+    <h1>card</h1>
+
+    <div class="card">
+      <div class="row1">
+        <img src="" alt="">
+      </div>
+
+      <div class="row2">
+        <ul>
+          <li>
+            <h1>John Doe</h1>
+          </li>
+          <li>
+            Some example text some example text. John Doe is an architect and engineer
+          </li>
+          <li>
+            <button>See Profile</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>번호</th>
+          <th>이름</th>
+          <th>전화번호</th>
+          <th>가입여부</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>홍길동1</td>
+          <td>010-1234-1234</td>
+          <td>대기중</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>홍길동2</td>
+          <td>010-1234-1234</td>
+          <td>대기중</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>홍길동3</td>
+          <td>010-1234-1234</td>
+          <td>대기중</td>
+        </tr>
+
+
+
+      </tbody>
+    </table>
+  </main>
+  <aside>aside</aside>
+  <footer>footer</footer>
+  <script type="module">
+    import { hello } from './util.js';
+    hello();
+  </script>
 </body>
 
 </html>

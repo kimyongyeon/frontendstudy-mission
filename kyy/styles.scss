@@ -1,0 +1,135 @@
+$bodyWidth: 100vw;
+$bodyHeight: 100vh;
+$borderBlack: 1px solid black;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flexColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+body {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows: 150px auto 50px;
+  grid-template-areas:
+    "header header"
+    "main aside"
+    "footer footer";
+
+  width: $bodyWidth;
+  height: $bodyHeight;
+
+  header {
+    grid-area: header;
+    border: $borderBlack;
+
+    nav {
+      ul {
+        padding: 10px;
+        border: $borderBlack;
+        list-style: none;
+        display: flex;
+        justify-content: space-around;
+        li {
+          list-style: 5px;
+        }
+      }
+    }
+  }
+
+  main {
+    grid-area: main;
+    border: $borderBlack;
+
+    .gallery-grid {
+      border: $borderBlack;
+      width: 100%;
+      height: 100px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+
+      grid-template-rows: repeat(4, 1fr);
+      div {
+        grid-column: 1 / 3;
+        margin: 1px;
+        border: $borderBlack;
+      }
+    }
+
+    .card {
+      width: 100%;
+      display: flex;
+      @include flexColumn;
+      border: $borderBlack;
+      padding: 5px;
+      .row1 {
+        width: 50vw;
+        height: 50vh;
+        background: url("https://i.namu.wiki/i/R0AhIJhNi8fkU2Al72pglkrT8QenAaCJd1as-d_iY6MC8nub1iI5VzIqzJlLa-1uzZm--TkB-KHFiT-P-t7bEg.webp")
+          no-repeat center center/cover;
+        border: $borderBlack;
+      }
+      .row2 {
+        border: $borderBlack;
+        ul {
+          list-style: none;
+          li {
+            margin: 10px 10px;
+          }
+        }
+      }
+    }
+
+    table {
+      border: $borderBlack;
+      width: 95%;
+      border-collapse: collapse;
+      margin: 10px;
+      thead {
+        border: $borderBlack;
+        text-align: center;
+        tr {
+          border: $borderBlack;
+          th {
+            border: $borderBlack;
+          }
+        }
+      }
+      tbody {
+        text-align: center;
+        border: $borderBlack;
+
+        tr {
+          border: $borderBlack;
+          td {
+            border: $borderBlack;
+          }
+        }
+      }
+    }
+  }
+
+  aside {
+    grid-area: aside;
+    border: $borderBlack;
+  }
+
+  footer {
+    grid-area: footer;
+    border: $borderBlack;
+  }
+}
